@@ -1,6 +1,6 @@
-# Nova Config - Fill This In
+# Pulse Config - Fill This In
 
-This is the only file you need to edit. Nova reads this to understand your channel and your goals.
+This is the only file you need to edit. Pulse reads this to understand your account and your goals.
 
 ---
 
@@ -8,40 +8,40 @@ This is the only file you need to edit. Nova reads this to understand your chann
 
 ```
 YOUR_NAME: [Your name]
-YOUR_CHANNEL_NAME: [Your YouTube channel name]
-YOUR_CHANNEL_URL: https://youtube.com/@yourchannel
-YOUR_NICHE: [e.g. AI tools, personal finance, fitness, cooking, dev tutorials]
-YOUR_AUDIENCE: [Who watches you - e.g. "early-stage founders who want to use AI to grow faster"]
-YOUR_GOAL: [e.g. "Hit 10,000 subscribers by end of 2025"]
-CURRENT_SUBSCRIBERS: [e.g. 1,200]
-POSTING_FREQUENCY: [e.g. "1 video per week"]
+YOUR_X_HANDLE: @[yourhandle]
+YOUR_X_URL: https://x.com/yourhandle
+YOUR_NICHE: [e.g. AI tools, personal finance, fitness, dev tutorials, crypto]
+YOUR_AUDIENCE: [Who follows you - e.g. "early-stage founders who want to use AI to grow faster"]
+YOUR_GOAL: [e.g. "Hit 10,000 followers by end of 2026"]
+CURRENT_FOLLOWERS: [e.g. 1,200]
+POSTING_FREQUENCY: [e.g. "1-2 posts per day"]
 ```
 
 ---
 
 ## Your Tone & Voice
 
-Describe how you naturally talk. Nova will use this when writing scripts.
+Describe how you naturally write on X. Pulse will use this when drafting posts and threads.
 
 ```
-VOICE_DESCRIPTION: [e.g. "Direct and casual. I swear occasionally. I use real numbers and
-specific examples. I hate filler phrases. I talk like I'm explaining something to a smart
-friend, not presenting to a boardroom."]
+VOICE_DESCRIPTION: [e.g. "Direct and casual. Short punchy sentences. I use real numbers and
+specific examples. No filler. I write like I'm explaining something to a smart friend
+in a group chat, not writing a LinkedIn post."]
 ```
 
 ---
 
-## Your Competitor Channels
+## Your Competitor Accounts
 
-These are channels in your niche Nova will monitor for outlier videos. Add 5-10.
+These are accounts in your niche Pulse will monitor for outlier posts. Add 3-5.
 
 ```
 COMPETITORS:
-  - https://youtube.com/@channel1
-  - https://youtube.com/@channel2
-  - https://youtube.com/@channel3
-  - https://youtube.com/@channel4
-  - https://youtube.com/@channel5
+  - @competitor1
+  - @competitor2
+  - @competitor3
+  - @competitor4
+  - @competitor5
 ```
 
 ---
@@ -59,26 +59,42 @@ CORE_TOPICS:
 
 ---
 
-## What Nova Should Avoid
+## What Pulse Should Avoid
 
 Anything you've tried that flopped, topics you hate, formats that feel off-brand.
 
 ```
 AVOID:
-  - [e.g. "talking head videos with no screen share"]
-  - [e.g. "listicles without a real story behind them"]
-  - [e.g. "any video about [topic] - tried it twice, tanked both times"]
+  - [e.g. "generic motivational quotes"]
+  - [e.g. "engagement bait with no substance"]
+  - [e.g. "any post about [topic] - tried it twice, tanked both times"]
 ```
 
 ---
 
-## Optional: Your Best Videos So Far
+## Optional: Your Best Posts So Far
 
-Paste your top 3 video URLs (by views or watch time). Nova will study what made them work.
+Paste your top 3 post/thread URLs (by engagement). Pulse will study what made them work.
 
 ```
-TOP_VIDEOS:
-  - https://youtu.be/[video1]
-  - https://youtu.be/[video2]
-  - https://youtu.be/[video3]
+TOP_POSTS:
+  - https://x.com/yourhandle/status/[post1]
+  - https://x.com/yourhandle/status/[post2]
+  - https://x.com/yourhandle/status/[post3]
+```
+
+---
+
+## X API Access
+
+Pulse uses the X API v2 to research competitors. You need a Bearer Token.
+
+How to get one:
+1. Go to developer.x.com and create a developer account
+2. Create a new project and app
+3. Subscribe to Pay-Per-Use plan (~$0.01 per operation, no monthly fee)
+4. Generate a Bearer Token in Keys and tokens
+
+```
+X_API_BEARER_TOKEN: [paste your Bearer Token here]
 ```
