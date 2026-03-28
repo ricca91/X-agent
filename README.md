@@ -1,31 +1,23 @@
-# Nova - YouTube Growth Agent for OpenClaw
+# Pulse - X Growth Agent for OpenClaw
 
-Nova is an AI agent that handles your YouTube content strategy end-to-end.
-Competitor research. Channel analysis. Video ideas. Scripts. Performance tracking. Feedback loop.
+Pulse is an AI agent that handles your X (Twitter) content strategy end-to-end.
+Competitor research. Account analysis. Post ideas. Threads. Performance tracking. Feedback loop.
 
 Built with [OpenClaw](https://openclaw.ai). Self-installs in under 5 minutes.
 
 ---
 
-## What Nova Does
+## What Pulse Does
 
 | System | What It Does |
 |--------|-------------|
-| 🔍 Competitor Scan | Finds outlier videos (2x+ avg) across your competitor channels and extracts what's working |
-| 📊 Channel Analysis | Analyzes your own videos to find patterns in what performs and what doesn't |
+| 🔍 Competitor Scan | Finds outlier posts (3x+ avg engagement) across competitor accounts via X API |
+| 📊 Account Analysis | Analyzes your own posts to find patterns in what performs and what doesn't |
 | 💡 Idea Generation | Interviews you first, then generates research-backed ideas grounded in real experience |
-| 📝 Script Writing | Full scripts in your voice with a complete SEO package (title variants, description, tags, chapters, thumbnail) |
-| 📈 Performance Logging | Tracks how each video does after publishing |
-| 🔄 Feedback Loop | Logs every approval and rejection with reasons - Nova never repeats a rejected angle |
+| 📝 Post/Thread Writing | Full drafts in your voice with optimization package (hook variants, hashtags, timing, media) |
+| 📈 Performance Logging | Tracks how each post does after publishing |
+| 🔄 Feedback Loop | Logs every approval and rejection with reasons - Pulse never repeats a rejected angle |
 | 🧠 Learning Loop | Reads all memory files before every session - gets smarter the longer you use it |
-
----
-
-## Results (the creator who built this)
-
-- 1,010 subs → 4,950 in 8 weeks using Nova (2,600+ gained in the last 4 weeks alone)
-- Hit YouTube monetization (1K subs + 4K watch hours)
-- Video prep cut from 4-6 hours to ~1 hour per video
 
 ---
 
@@ -33,7 +25,25 @@ Built with [OpenClaw](https://openclaw.ai). Self-installs in under 5 minutes.
 
 - [OpenClaw](https://openclaw.ai) installed
 - Any supported AI model (Claude, GPT-4o, Gemini - all work)
-- A YouTube channel (any size, any niche)
+- An X (Twitter) account (any size, any niche)
+- X API access (Bearer Token) - see API Setup below
+
+---
+
+## API Setup
+
+Pulse uses the X API v2 to research competitors. Here's how to get access:
+
+1. Go to [developer.x.com](https://developer.x.com) and sign up for a developer account
+2. Create a new project and app in the Developer Portal
+3. Subscribe to the **Pay-Per-Use** plan (recommended):
+   - ~$0.01 per tweet read, ~$0.01 per user lookup
+   - No monthly commitment, no minimum spend
+   - A full competitor scan of 5 accounts costs roughly $5
+4. Go to **Keys and tokens** → generate a **Bearer Token**
+5. You'll paste this token during onboarding
+
+**Pricing note:** The Free tier is too limited for competitor scanning (1 request/24h). The Basic plan ($200/month flat) only makes sense above ~20K operations/month. For most creators, Pay-Per-Use is the best option.
 
 ---
 
@@ -44,87 +54,88 @@ Built with [OpenClaw](https://openclaw.ai). Self-installs in under 5 minutes.
 Just tell your OpenClaw agent:
 
 ```
-Install this skill: https://github.com/sharbelxyz/nova-youtube-agent
+Install this skill: https://github.com/ricca91/x-agent
 ```
 
-OpenClaw will clone the repo, install the skill, and Nova will run onboarding automatically.
+OpenClaw will clone the repo, install the skill, and Pulse will run onboarding automatically.
 
 ### Option B: Manual install
 
 ```bash
 # Clone into your OpenClaw skills directory
-git clone https://github.com/sharbelxyz/nova-youtube-agent.git ~/clawd/skills/nova-youtube-agent
+git clone https://github.com/ricca91/x-agent.git ~/clawd/skills/x-agent
 ```
 
 Then tell your OpenClaw:
 ```
-Install Nova
+Install Pulse
 ```
 
-Nova will detect the new skill and walk you through 10 onboarding questions.
+Pulse will detect the new skill and walk you through 11 onboarding questions.
 
 ---
 
 ## Onboarding
 
-First time you run Nova, she'll ask you 10 questions:
+First time you run Pulse, it'll ask you 11 questions:
 
-1. Your name and channel name
-2. Channel URL
+1. Your name and X handle
+2. Profile URL
 3. Your niche (one sentence)
 4. Your target audience
-5. Your subscriber goal + deadline
-6. Current subscriber count
-7. How you naturally talk (voice description)
-8. 5-10 competitor channels to monitor
+5. Your follower goal + deadline
+6. Current follower count
+7. How you naturally write (voice description)
+8. 3-5 competitor accounts to monitor
 9. What to avoid (flops, off-brand formats)
-10. Your top 2-3 videos (optional - for voice calibration)
+10. Your top 2-3 posts (optional - for voice calibration)
+11. Your X API Bearer Token
 
-Takes about 5 minutes. Nova writes your answers to `config.md` automatically. You never do this again.
+Takes about 5 minutes. Pulse writes your answers to `config.md` automatically. You never do this again.
 
 ---
 
-## How to Use Nova
+## How to Use Pulse
 
-After setup, just talk to her naturally:
+After setup, just talk naturally:
 
 ```
-Nova, scan my competitors for what's working this week
+Pulse, scan my competitors for what's working this week
 ```
 ```
-Nova, I want to make a video - interview me and let's find an idea
+Pulse, I want to write a post - interview me and let's find an idea
 ```
 ```
-Nova, write a full script for [idea]
+Pulse, write a thread about [idea]
 ```
 ```
-Nova, my last video got 4,200 views - log the performance
+Pulse, my last post got 1,200 likes - log the performance
 ```
 ```
-Nova, show me the feedback loop - what patterns have you noticed?
+Pulse, show me the feedback loop - what patterns have you noticed?
 ```
 
 ---
 
 ## How the Learning Loop Works
 
-Nova keeps a `memory/` folder with:
+Pulse keeps a `memory/` folder with:
 - `approved-ideas.md` - every idea you said yes to
 - `rejected-ideas.md` - every idea you rejected + why
-- `performance-log.md` - every video's stats after publishing
+- `performance-log.md` - every post's stats after publishing
 - `competitor-scans.md` - history of niche research
-- `voice-examples.md` - your voice patterns and phrases
+- `voice-examples.md` - your writing patterns and phrases
 
-Before every session, Nova reads all of these. She never repeats a rejected angle. She weights suggestions toward what's actually performed on your channel. The longer you use her, the better the ideas.
+Before every session, Pulse reads all of these. It never repeats a rejected angle. It weights suggestions toward what's actually performed on your account. The longer you use it, the better the ideas.
 
 ---
 
 ## File Structure
 
 ```
-nova-youtube-agent/
+x-agent/
 ├── README.md              ← You're reading this
-├── SKILL.md               ← Nova's full instructions (all 7 systems)
+├── SKILL.md               ← Pulse's full instructions (all 7 systems)
 ├── config.md              ← Auto-created during onboarding (gitignored)
 ├── example-config.md      ← Real example for reference
 └── memory/
@@ -132,48 +143,41 @@ nova-youtube-agent/
     ├── rejected-ideas.md  ← Auto-populated (gitignored)
     ├── performance-log.md ← Auto-populated (gitignored)
     ├── competitor-scans.md← Auto-populated (gitignored)
-    ├── channel-analysis.md← Auto-populated (gitignored)
+    ├── account-analysis.md← Auto-populated (gitignored)
     └── voice-examples.md  ← Auto-populated (gitignored)
 ```
 
-Note: `config.md` and all `memory/` files are gitignored. Your personal data never leaves your machine.
+Note: `config.md` and all `memory/` files are gitignored. Your personal data and API token never leave your machine.
 
 ---
 
-## Customizing Nova
+## Customizing Pulse
 
-- To change your channel details: edit `config.md`
-- To change how Nova behaves: edit `SKILL.md` (plain English, no code)
-- To reset and start fresh: delete `config.md` and all `memory/` files, then run "Install Nova" again
+- To change your account details: edit `config.md`
+- To change how Pulse behaves: edit `SKILL.md` (plain English, no code)
+- To reset and start fresh: delete `config.md` and all `memory/` files, then run "Install Pulse" again
 
 ---
 
 ## FAQ
 
 **Does this work for any niche?**
-Yes. Onboarding calibrates Nova to your niche, voice, and competitors.
+Yes. Onboarding calibrates Pulse to your niche, voice, and competitors.
 
 **Do I need to be technical?**
-No. If you can install OpenClaw and answer 10 questions, you're set.
+No. If you can install OpenClaw, get an X API token, and answer 11 questions, you're set.
 
-**Does Nova post videos automatically?**
-No. Nova handles strategy and scripts. Filming and publishing stays with you.
+**Does Pulse post automatically?**
+No. Pulse handles strategy and drafts. Publishing stays with you.
 
 **Is my data private?**
-Yes. `config.md` and all `memory/` files are gitignored and stay on your machine.
+Yes. `config.md` (including your API token) and all `memory/` files are gitignored and stay on your machine.
 
 **What model works best?**
 Claude Sonnet or GPT-4o. Both work well for this.
 
----
-
-## About
-
-Built by [Sharbel](https://youtube.com/@sharbel) - founder, AI builder, creator.
-
-Video that goes with this repo: [The AI Agent That Got Me YouTube Monetized](https://youtu.be/MwGbZkYYHVw)
-
-If this helps you, star the repo. More agent builds on the channel.
+**How much does the X API cost?**
+With Pay-Per-Use: ~$0.01 per operation. A typical competitor scan costs ~$5. Monthly cost depends on usage but most creators spend $10-30/month.
 
 ---
 
