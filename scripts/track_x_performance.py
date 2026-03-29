@@ -229,17 +229,34 @@ def build_summary(username: str, user_payload: dict[str, Any], tweets: list[Twee
 
 
 
-def append_performance_log(username: str, tweets: list[TweetSnapshot], fetched_at: str) -> None:
+def append_performance_log(username: str, user_payload: dict[str, Any], tweets: list[TweetSnapshot], fetched_at: str) -> None:
     path = MEMORY_DIR / "performance-log.md"
-    top = max(tweets, key=lambda t: t.engagement_total) if tweets else None
+    user = user_payload.get("data", {})
+    followers = user.get("public_metrics", {}).get("followers_count", 0)
+
+    sorted_tweets = sorted(tweets, key=lambda t: t.engagement_total, reverse=True)
+
     lines = [f"## Auto snapshot for @{username} - logged {fetched_at}"]
+    lines.append(f"- Followers at snapshot: {followers}")
     lines.append(f"- Posts analyzed: {len(tweets)}")
-    if top:
-        lines.append(f"- Best post: {top.url}")
-        lines.append(
-            f"- Best post metrics: {top.like_count} likes, {top.retweet_count} reposts, {top.reply_count} replies, {top.quote_count} quotes, {top.impression_count or 0} impressions"
-        )
-        lines.append(f"- Best post text: {top.text[:140]}")
+    lines.append("")
+
+    if sorted_tweets:
+        lines.append("### All analyzed posts (sorted by engagement)")
+        lines.append("| URL | Likes | Reposts | Replies | Quotes | Bookmarks | Impressions | Total engagement |")
+        lines.append("|-----|-------|---------|---------|--------|-----------|-------------|-----------------|")
+        for t in sorted_tweets:
+            lines.append(
+                f"| {t.url} | {t.like_count} | {t.retweet_count} | {t.reply_count} | {t.quote_count} | {t.bookmark_count or 0} | {t.impression_count or 0} | {t.engagement_total} |"
+            )
+        lines.append("")
+        lines.append("### Post details")
+        for t in sorted_tweets:
+            lines.append(f"**{t.url}** ({t.created_at})")
+            lines.append(f"- Text: {t.text[:200]}")
+            lines.append(f"- Reply: {'yes' if t.is_reply else 'no'} | Media: {'yes' if t.media_keys else 'no'}")
+            lines.append("")
+
     lines.append("")
     with path.open("a", encoding="utf-8") as fh:
         fh.write("\n".join(lines) + "\n")
@@ -312,7 +329,7 @@ def main() -> int:
     tweets = normalize_tweets(username, tweets_payload)
     summary = build_summary(username, user_payload, tweets, fetched_at)
     paths = save_outputs(username, user_payload, tweets_payload, tweets, summary, fetched_at)
-    append_performance_log(username, tweets, fetched_at)
+    append_performance_log(username, user_payload, tweets, fetched_at)
 
     print(summary)
     print("Saved files:")

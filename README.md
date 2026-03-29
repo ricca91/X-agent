@@ -176,7 +176,16 @@ What it does:
 - writes a readable markdown report in the same folder
 - appends a short automatic snapshot entry to `memory/performance-log.md`
 
-Use this for a quick local MVP snapshot. No cron, no auto-posting, no dashboards.
+Use this for a quick local MVP snapshot. No auto-posting, no dashboards.
+
+To automate daily snapshots (Mac/Linux), add this to your crontab (`crontab -e`):
+
+```bash
+# Daily snapshot at 9:00 AM
+0 9 * * * cd ~/.openclaw/skills/x-agent && X_API_BEARER_TOKEN='your-token-here' python3 scripts/track_x_performance.py >> /tmp/pulse-snapshot.log 2>&1
+```
+
+Once the snapshot runs, Pulse will read `memory/performance-log.md` automatically during Account Analysis (System 2) and Performance Logging (System 5) - no manual data entry needed.
 
 ## FAQ
 
