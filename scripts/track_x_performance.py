@@ -24,7 +24,7 @@ from pathlib import Path
 from typing import Any
 
 API_BASE = "https://api.twitter.com/2"
-DEFAULT_USERNAME = "RiccSartori"
+DEFAULT_USERNAME = "your_x_handle"
 DEFAULT_LIMIT = 10
 ROOT = Path(__file__).resolve().parents[1]
 MEMORY_DIR = ROOT / "memory"

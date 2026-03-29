@@ -167,7 +167,7 @@ A small Python script now ships with the skill:
 ```bash
 cd ~/.openclaw/skills/x-agent
 export X_API_BEARER_TOKEN='your-token-here'
-python3 scripts/track_x_performance.py --username RiccSartori --limit 10
+python3 scripts/track_x_performance.py --username your_x_handle --limit 10
 ```
 
 What it does:
