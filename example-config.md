@@ -80,6 +80,9 @@ TOP_POSTS:
 
 ## X API Access
 
-```
-X_API_BEARER_TOKEN: AAAAAAAAAAAAAAAAAAA...your-token-here
+Keep the token out of this file.
+Set it in your environment instead:
+
+```bash
+export X_API_BEARER_TOKEN='your-token-here'
 ```

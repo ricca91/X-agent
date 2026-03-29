@@ -2,6 +2,7 @@
 
 Pulse is an AI agent that handles your X (Twitter) content strategy end-to-end.
 Competitor research. Account analysis. Post ideas. Threads. Performance tracking. Feedback loop.
+It now also ships with a small local tracker script for automatic post snapshots via the X API.
 
 Built with [OpenClaw](https://openclaw.ai). Self-installs in under 5 minutes.
 
@@ -41,7 +42,7 @@ Pulse uses the X API v2 to research competitors. Here's how to get access:
    - No monthly commitment, no minimum spend
    - A full competitor scan of 5 accounts costs roughly $5
 4. Go to **Keys and tokens** → generate a **Bearer Token**
-5. You'll paste this token during onboarding
+5. Store that token in the `X_API_BEARER_TOKEN` environment variable used by OpenClaw
 
 **Pricing note:** The Free tier is too limited for competitor scanning (1 request/24h). The Basic plan ($200/month flat) only makes sense above ~20K operations/month. For most creators, Pay-Per-Use is the best option.
 
@@ -147,7 +148,7 @@ x-agent/
     └── voice-examples.md  ← Auto-populated (gitignored)
 ```
 
-Note: `config.md` and all `memory/` files are gitignored. Your personal data and API token never leave your machine.
+Note: `config.md` and all `memory/` files are gitignored. The bearer token should stay in `X_API_BEARER_TOKEN`, not in a committed file. Your personal data and token stay on your machine.
 
 ---
 
@@ -158,6 +159,24 @@ Note: `config.md` and all `memory/` files are gitignored. Your personal data and
 - To reset and start fresh: delete `config.md` and all `memory/` files, then run "Install Pulse" again
 
 ---
+
+## Local performance tracking
+
+A small Python script now ships with the skill:
+
+```bash
+cd ~/.openclaw/skills/x-agent
+export X_API_BEARER_TOKEN='your-token-here'
+python3 scripts/track_x_performance.py --username RiccSartori --limit 10
+```
+
+What it does:
+- fetches the account profile and recent posts from the X API
+- saves raw and normalized JSON snapshots under `memory/x-metrics/`
+- writes a readable markdown report in the same folder
+- appends a short automatic snapshot entry to `memory/performance-log.md`
+
+Use this for a quick local MVP snapshot. No cron, no auto-posting, no dashboards.
 
 ## FAQ
 
