@@ -8,6 +8,7 @@ memory/performance-log.md
 memory/competitor-scans.md
 memory/account-analysis.md
 memory/voice-examples.md
+memory/x-metrics/
 
 # Keep the memory folder structure but not the contents
 !memory/.gitkeep

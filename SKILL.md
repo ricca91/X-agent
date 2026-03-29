@@ -5,7 +5,8 @@ You research competitors, learn your creator's voice, generate ideas, write post
 track performance, and get smarter over time through a feedback loop.
 
 All competitor research and data access is done through the X API v2.
-You use the creator's Bearer Token (stored in `config.md`) to make API calls.
+You use the creator's Bearer Token from the `X_API_BEARER_TOKEN` environment variable to make API calls.
+If `config.md` still contains a token, treat that as legacy setup and move it to env storage instead of repeating it.
 
 ---
 
@@ -70,11 +71,11 @@ Here's how to set it up:
 2. Create a new project and app
 3. Subscribe to the Pay-Per-Use plan (costs ~$0.01 per operation, no monthly commitment)
 4. Go to Keys and tokens → generate a Bearer Token
-5. Paste your Bearer Token here.
+5. Store it in the `X_API_BEARER_TOKEN` environment variable used by OpenClaw, then confirm when it's set.
 
-Your token is stored locally in config.md and never shared."
+Your token stays in env storage and should not be written back into config.md."
 
-After all answers, write them to `config.md` in this skill directory using the template in `config.md`.
+After all answers, write the non-secret answers to `config.md` in this skill directory using the template in `config.md`.
 Then say:
 "Perfect. Pulse is configured. Here's what you can ask me to do:" → show MAIN MENU
 
@@ -126,7 +127,8 @@ GET https://api.twitter.com/2/tweets/:id?tweet.fields=public_metrics,created_at,
 ```
 
 **Response parsing:**
-- `public_metrics` contains: `like_count`, `retweet_count`, `reply_count`, `quote_count`, `impression_count`, `bookmark_count`
+- `public_metrics` contains: `like_count`, `retweet_count`, `reply_count`, `quote_count`, `impression_count`
+- Note: `bookmark_count` is also returned in `public_metrics` in practice but is not officially documented by X.
 - `user.public_metrics` contains: `followers_count`, `following_count`, `tweet_count`
 
 **Rate limits:** Respect 15-minute windows. If you get a 429 response, wait and retry.
@@ -185,7 +187,11 @@ Save output to `memory/competitor-scans.md` (append with date header).
 
 Trigger: user says "analyze my account", "what's working for me", "account review"
 
-**Ask the user to provide:**
+**Before asking the user, check `memory/performance-log.md` for recent auto-snapshots.**
+If an "Auto snapshot" entry exists from the last 7 days, use that data directly - you already have the posts ranked by engagement, their metrics, and follower count at that date.
+Only ask the user manually if no recent snapshot is available in the log.
+
+**If no snapshot available, ask the user to provide:**
 - Their top 5-10 posts by engagement (text + like/repost/reply counts)
 - Their bottom 5 posts (text + engagement counts)
 - Current overall stats: avg engagement per post, follower growth rate, best performing format if known
@@ -340,15 +346,13 @@ Pick one. Don't list three CTAs.
 
 Trigger: user says "log performance", "here are my stats", "post got X likes"
 
-**Ask for:**
-- Post text (or URL)
-- Impressions (if known)
-- Likes
-- Reposts
-- Replies
-- Quotes (if known)
-- Bookmarks (if known)
-- Followers gained from this post (if known)
+**First, check `memory/performance-log.md` for auto-snapshot data.**
+If the post URL or its text appears in a recent "Auto snapshot" entry, pre-fill all available metrics (likes, reposts, replies, quotes, bookmarks, impressions) from there.
+Then only ask for what's missing:
+
+**Ask for (only what's not already in the snapshot):**
+- Post text or URL (to identify the post)
+- Followers gained from this post (if known) - not tracked by the snapshot script
 - Time period: 24h / 48h / 7d
 - Did it outperform, match, or underperform their account average?
 
